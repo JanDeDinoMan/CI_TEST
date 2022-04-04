@@ -1,5 +1,7 @@
 name: Place Tux CI
 
+on: push
+
 jobs:
   build:
     runs-on: ubuntu-latest
