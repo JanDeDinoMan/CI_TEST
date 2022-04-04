@@ -12,6 +12,9 @@ jobs:
         run: |
           mkdir .build
 
+      - name: Update hash
+        run: echo $(git rev-parse "$GITHUB_SHA") > ./.build/bot_hash
+
       - uses: EndBug/add-and-commit@v9
         with:
           add: "./.build"
