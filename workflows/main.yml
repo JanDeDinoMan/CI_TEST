@@ -1,0 +1,34 @@
+name: Place Tux CI
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v3
+        with:
+          python-version: "3.10" # Version range or exact version of a Python version to use, using SemVer's version range syntax
+          architecture: "x64" # optional x64 or x86. Defaults to x64 if not specified
+          cache: "pip"
+
+
+      - name: Copy raw files
+        run: |
+          mkdir .build
+
+      - uses: EndBug/add-and-commit@v9
+        with:
+          add: "./.build"
+          committer_name: GitHub Actions
+          committer_email: actions@github.com
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./.build/
+          keep_files: true
+          full_commit_message: deploy image
