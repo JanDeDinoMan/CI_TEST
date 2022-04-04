@@ -1,9 +1,4 @@
 name: Place Tux CI
-on:
-  push:
-    branches: [main]
-  commit:
-    branches: [main]
 
 jobs:
   build:
